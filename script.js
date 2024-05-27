@@ -15,7 +15,9 @@ buttons.forEach((button) => {
 });
 
 function processInput(button) {
-  if (numberVals.includes(button.id)) {
+  if (display.textContent.replace(/\s/g, "").length >= 15 && button.id !== 'ce' && button.id !== '=') {
+    //full
+  } else if (numberVals.includes(button.id)) {
     if (operator !== '') {
       operandB = changeOperand(operandB, button);
     } else {
@@ -66,7 +68,7 @@ function updateDisplay() {
     display.textContent = operandA;
     console.log('Displaying A');
   } else if (operandB === '') {
-    display.textContent = operandA + ' ' + operator
+    display.textContent = operandA + ' ' + operator;
     console.log('Displaying A+OP');
   } else {
     display.textContent = operandA + ' ' + operator + ' ' + operandB;
