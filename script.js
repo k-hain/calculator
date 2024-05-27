@@ -15,7 +15,7 @@ buttons.forEach((button) => {
 });
 
 function processInput(button) {
-  if (display.textContent.replace(/\s/g, "").length >= 15 && button.id !== 'ce' && button.id !== '=') {
+  if (display.textContent.length >= 15 && button.id !== 'ce' && button.id !== '=') {
     //full
   } else if (numberVals.includes(button.id)) {
     if (operator !== '') {
