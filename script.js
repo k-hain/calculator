@@ -1,7 +1,10 @@
 const buttons = document.querySelectorAll('button');
-const display = document.querySelector('#display');
+const operandADisplay = document.querySelector('#operandA');
+const operandBDisplay = document.querySelector('#operandB');
+const operatorDisplay = document.querySelector('#operator');
 
 let operandA = '0';
+operandADisplay.textContent = operandA;
 let operandB = '';
 let operator = '';
 
@@ -15,11 +18,21 @@ buttons.forEach((button) => {
 });
 
 function processInput(button) {
-  if (display.textContent.length >= 15 && button.id !== 'ce' && button.id !== '=') {
-    //full
-  } else if (numberVals.includes(button.id)) {
+  if (button.id === '=') {
+    if (operandB.length >= 1) {
+      operandA = operate(operandA, operandB, operator);
+      operator = '';
+      operandB = '';
+    }
+  } else if (operatorVals.includes(button.id)) {
+    if (operandA === '0' && button.id === '-') {
+      operandA = button.id;
+    } else { 
+      operator = button.id;
+    }
+  } else if (numberVals.includes(button.id) || button.id === '.') {
     if (operator !== '') {
-      operandB = changeOperand(operandB, button);
+      operandB = changeOperand(operandB, button);  
     } else {
       operandA = changeOperand(operandA, button);
     }
@@ -39,24 +52,21 @@ function processInput(button) {
         operandA = operandA.slice(0, -1);
       }
     }
-  } else if (button.id === '=') {
-    if (operandB.length >= 1) {
-      operandA = operate(operandA, operandB, operator);
-      operator = '';
-      operandB = '';
-    }
-  } else if (button.id === '.') {
-    if (operandB === '' && operator === '' && !operandA.includes('.')) {
-      operandA = changeOperand(operandA, button);
-    } else if (!operandB !== '' && !operandB.includes('.')) {
-      operandB = changeOperand(operandB, button);
-    }
   }
   updateDisplay();
 }
 
 function changeOperand(operand, button) {
-  if (operand === '0') {
+  if (operand.length >= 15) {
+    //operand is full = do nothing
+    return operand;
+  } else if (button.id === '.') {
+    if (operand.includes('.')) {
+      return operand;
+    } else {
+      return operand += button.id;
+    }
+  } else if (operand === '0') {
     return button.id;
   } else {
     return operand += button.id;
@@ -64,19 +74,9 @@ function changeOperand(operand, button) {
 }
 
 function updateDisplay() {
-  if (operandB === '' && operator === '') {
-    display.textContent = operandA;
-    //---
-    console.log('Displaying A');
-  } else if (operandB === '') {
-    display.textContent = operandA + ' ' + operator;
-    //---
-    console.log('Displaying A+OP');
-  } else {
-    display.textContent = operandA + ' ' + operator + ' ' + operandB;
-    //---
-    console.log('Displaying A+OP+B');
-  }
+  operandADisplay.textContent = operandA;
+  operatorDisplay.textContent = operator;
+  operandBDisplay.textContent = operandB;
   //---
   console.log('A: ' + operandA);
   console.log(typeof operandA);
