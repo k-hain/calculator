@@ -66,23 +66,29 @@ function changeOperand(operand, button) {
 function updateDisplay() {
   if (operandB === '' && operator === '') {
     display.textContent = operandA;
+    //---
     console.log('Displaying A');
   } else if (operandB === '') {
     display.textContent = operandA + ' ' + operator;
+    //---
     console.log('Displaying A+OP');
   } else {
     display.textContent = operandA + ' ' + operator + ' ' + operandB;
+    //---
     console.log('Displaying A+OP+B');
   }
+  //---
   console.log('A: ' + operandA);
+  console.log(typeof operandA);
   console.log('OP: ' + operator);
   console.log('B: ' + operandB);
-  console.log(typeof operandA);
+  console.log(typeof operandB);
   console.log('-----');
+  //---
 }
 
 function add(a, b) {
-	return a + b;
+	return parseFloat(a) + parseFloat(b);
 }
 
 function subtract(a, b) {
@@ -99,7 +105,7 @@ function multiply(a, b) {
 
 function operate(a, b, operation) {
   if (operation === '+') {
-    return add(a, b);
+    return add(a, b).toString();
   } else if (operation === '-') {
     return subtract(a, b).toString();
   } else if (operation === '/') {
