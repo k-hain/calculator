@@ -11,13 +11,13 @@ html {
 }
 
 button {
-  font-size: 1rem;
-  padding: 1rem 1rem;
-  width: 8rem;
+  font-size: 1.25rem;
+  height: 3rem;
+  width: 7rem;
   background-color: rgb(104, 103, 103);
   color: white;
   border-width: 0;
-  border-radius: .5rem;
+  border-radius: 8px;
 }
 
 #calculatorContainer {
@@ -30,30 +30,36 @@ button {
 
 #calculator {
   background-color: rgb(238, 238, 238);
-  width: 37rem;
   padding: 2rem;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   gap: 1rem;
-  border-radius: .5rem;
+  border-radius: 8px;
   margin: 0 auto;
 }
 
 #display {
   display: flex;
-  justify-content: right;
-  align-items: center;
-  background-color: white;
-  border-radius: .5rem;
-  padding: 0 1rem;
-  width: 17rem;
-  text-align: right;
-  font-size: 1.5rem;
-}
-
-.btnRow {
-  display: flex;
-  gap: 1rem;
   justify-content: space-between;
+  align-items: top;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: right;
+  font-size: 2rem;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
+.btnRow, .btnCol {
+  display: inline-flex;
+  gap: .75rem;
+}
+
+.btnCol {
+  flex-direction: column;
+}
+
+#operandA, #operator, #operandB {
+  display: inline-flex;
+}
