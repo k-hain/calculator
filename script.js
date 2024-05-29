@@ -8,8 +8,9 @@ operandADisplay.textContent = operandA;
 let operandB = '';
 let operator = '';
 
-const numberVals = '0123456789';
+const operandVals = '0123456789.';
 const operatorVals = '+-*/';
+const characterLimit = 15;
 
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
@@ -30,7 +31,7 @@ function processInput(button) {
     } else { 
       operator = button.id;
     }
-  } else if (numberVals.includes(button.id) || button.id === '.') {
+  } else if (operandVals.includes(button.id)) {
     if (operator !== '') {
       operandB = changeOperand(operandB, button);  
     } else {
@@ -57,7 +58,7 @@ function processInput(button) {
 }
 
 function changeOperand(operand, button) {
-  if (operand.length >= 15) {
+  if (operand.length >= characterLimit) {
     //operand is full = do nothing
     return operand;
   } else if (button.id === '.') {
