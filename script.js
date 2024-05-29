@@ -68,10 +68,14 @@ function changeOperand(operand, button) {
     //operand is full = do nothing
     return operand;
   } else if (button.id === '.') {
-    if (operand.includes('.')) {
+    if (operator !== '') {
+      if (operand === '') {
+        return '0.';
+      } else {
+        return operand + '.';
+      }   
+    } else if (operand.includes('.')) {
       return operand;
-    } else if (operator !== '') {
-      return operand + '.';
     } else {
       return operand += button.id;
     }
