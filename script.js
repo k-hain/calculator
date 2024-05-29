@@ -19,7 +19,11 @@ buttons.forEach((button) => {
 });
 
 function processInput(button) {
-  if (button.id === '=') {
+  if (button.id === 'ac') {
+    operandA = '0';
+    operator = '';
+    operandB = '';
+  } else if (button.id === '=') {
     if (operandB.length >= 1) {
       operandA = operate(operandA, operandB, operator);
       operator = '';
