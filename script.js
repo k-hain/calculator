@@ -44,8 +44,8 @@ function processInput(button) {
   } else if (operatorVals.includes(button.id)) {
     operator = button.id;
   } else if (button.id === 'ce') {
-    if (operandB.length === 2 && operandB.includes('.')) {
-    operandB = '';
+    if (operandB === '0.') {
+      operandB = '';
     } else if (operandB !== '') {
       operandB = operandB.slice(0, -1);
     } else if (operator !== '') {
@@ -73,7 +73,7 @@ function changeOperand(operand, button) {
         return '0.';
       } else {
         return operand + '.';
-      }   
+      }
     } else if (operand.includes('.')) {
       return operand;
     } else {
