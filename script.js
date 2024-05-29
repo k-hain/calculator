@@ -84,7 +84,7 @@ function updateDisplay() {
   console.log('OP: ' + operator);
   console.log('B: ' + operandB);
   console.log(typeof operandB);
-  console.log('-----');
+  console.log('-- Display updated --');
   //---
 }
 
@@ -105,13 +105,29 @@ function multiply(a, b) {
 }
 
 function operate(a, b, operation) {
+  let result = '';
   if (operation === '+') {
-    return add(a, b).toString();
+    result = add(a, b).toString();
   } else if (operation === '-') {
-    return subtract(a, b).toString();
+    result = subtract(a, b).toString();
   } else if (operation === '/') {
-    return divide(a, b).toString();
+    result = divide(a, b).toString();
   } else if (operation === '*') {
-    return multiply(a, b).toString();
+    result = multiply(a, b).toString();
   }
+  if (result.length > characterLimit) {
+    console.log('Result to long, cutting down to characterLimit.');
+    if (result.includes('.')) {
+      let decimalLength = result.slice(result.indexOf('.') + 1).length;
+      console.log('decimalLength:' + decimalLength);
+      let targetLength = decimalLength - (result.length - characterLimit);
+      console.log('targetLength:' + targetLength);
+      console.log('result:' + result);
+      result = parseFloat(result).toFixed(targetLength);
+    } else {
+      alert("Outcome larger than character limit: result isn't accurate ;-(");
+      result = result.slice(0, characterLimit);
+    }
+  }
+  return result;
 }
