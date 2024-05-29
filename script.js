@@ -71,7 +71,7 @@ function changeOperand(operand, button) {
     if (operand.includes('.')) {
       return operand;
     } else if (operator !== '') {
-      return '0.';
+      return operand + '.';
     } else {
       return operand += button.id;
     }
