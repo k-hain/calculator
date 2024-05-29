@@ -44,7 +44,9 @@ function processInput(button) {
   } else if (operatorVals.includes(button.id)) {
     operator = button.id;
   } else if (button.id === 'ce') {
-    if (operandB !== '') {
+    if (operandB.length === 2 && operandB.includes('.')) {
+    operandB = '';
+    } else if (operandB !== '') {
       operandB = operandB.slice(0, -1);
     } else if (operator !== '') {
       operator = '';
