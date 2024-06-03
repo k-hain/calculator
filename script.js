@@ -120,14 +120,14 @@ function updateDisplay() {
   operandADisplay.textContent = operandA;
   operatorDisplay.textContent = operator;
   operandBDisplay.textContent = operandB;
-  //---
+  /*
   console.log('A: ' + operandA);
   console.log("typeof A: " + typeof operandA);
   console.log('OP: ' + operator);
   console.log('B: ' + operandB);
   console.log("typeof B: " + typeof operandB);
   console.log('-- Display updated --');
-  //---
+  */
 }
 
 function add(a, b) {
@@ -161,13 +161,13 @@ function operate(a, b, operation) {
     result = removeZero(result);
   }
   if (result.length > characterLimit) {
-    console.log('Result too long, cutting down to characterLimit.');
+    //console.log('Result too long, cutting down to characterLimit.');
     if (result.includes('.')) {
       let decimalLength = result.slice(result.indexOf('.') + 1).length;
-      console.log('decimalLength: ' + decimalLength);
+      //console.log('decimalLength: ' + decimalLength);
       let targetLength = decimalLength - (result.length - characterLimit);
-      console.log('targetLength: ' + targetLength);
-      console.log('result before: ' + result);
+      //console.log('targetLength: ' + targetLength);
+      //console.log('result before: ' + result);
       result = parseFloat(result).toFixed(targetLength);
       if (result.includes('.') && result[result.length - 1] === '0') {
         return removeZero(result);
@@ -181,8 +181,8 @@ function operate(a, b, operation) {
 }
 
 function removeZero(val) {
-  console.log('Removing zeros...');
-  console.log('Result before cutting: ' + val);
+  //console.log('Removing zeros...');
+  //console.log('Result before cutting: ' + val);
   let cutHere = 0;
   let keepGoing = 1;
   let i = 0;
@@ -195,6 +195,6 @@ function removeZero(val) {
       keepGoing = 0;
     }
   }
-  console.log('First non-zero at:' + cutHere);
+  //console.log('First non-zero at:' + cutHere);
   return val.slice(0, -cutHere);
 }
