@@ -14,9 +14,11 @@ button {
   font-size: 1.25rem;
   height: 3rem;
   width: 7rem;
-  background-color: rgb(104, 103, 103);
+  background-color: rgb(55, 59, 104);
+  border-color: rgba(0, 0, 0, 0.2);
   color: white;
-  border-width: 0;
+  border-style: solid;
+  border-width: 0px;
   border-radius: 8px;
 }
 
@@ -29,13 +31,17 @@ button {
 }
 
 #calculator {
-  background-color: rgb(238, 238, 238);
+  background-color: rgb(247, 247, 247);
   padding: 2rem;
   display: inline-flex;
   flex-direction: column;
   gap: 1rem;
   border-radius: 8px;
   margin: 0 auto;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.2);
+  
 }
 
 #display {
@@ -49,6 +55,9 @@ button {
   font-size: 2rem;
   flex-direction: column;
   flex-grow: 1;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .btnRow, .btnCol {
@@ -63,3 +72,28 @@ button {
 #operandA, #operator, #operandB {
   display: inline-flex;
 }
+
+.btnShadow {
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.btnShadowClicked {
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.2);
+}
+
+.btnHover {
+  border-width: 1px;
+}
+
+.btnRed {
+  background-color: rgb(175, 32, 87);
+}
+
+.btnCyan {
+  background-color: rgb(19, 156, 145);
+}
+
+.btnOrange {
+  background-color: rgb(199, 116, 39);
+}
+

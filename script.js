@@ -13,12 +13,23 @@ const operatorVals = '+-*/';
 const characterLimit = 15;
 
 buttons.forEach((button) => {
-  button.addEventListener('click', () => {
-    processInput(button);
+  button.addEventListener('mousedown', () => {
+    processDown(button);
+  });
+  button.addEventListener('mouseup', () => {
+    processUp(button);
+  });
+  button.addEventListener('mouseenter', () => {
+    processEnter(button);
+  });
+  button.addEventListener('mouseleave', () => {
+    processLeave(button);
   });
 });
 
-function processInput(button) {
+function processDown(button) {
+  button.classList.remove('btnShadow');
+  button.classList.add('btnShadowClicked');
   if (button.id === 'ac') {
     operandA = '0';
     operator = '';
@@ -61,6 +72,25 @@ function processInput(button) {
     }
   }
   updateDisplay();
+}
+
+function processUp(button) {
+  button.classList.remove('btnShadowClicked');
+  button.classList.add('btnShadow');
+}
+
+function processEnter(button) {
+  button.classList.add('btnHover');
+}
+
+function processLeave(button) {
+  if (button.classList.contains('btnHover')) {
+    button.classList.remove('btnHover');
+  }
+  if (button.classList.contains('btnShadowClicked')) {
+    button.classList.remove('btnShadowClicked');
+    button.classList.add('btnShadow');
+  }
 }
 
 function changeOperand(operand, button) {
@@ -134,10 +164,10 @@ function operate(a, b, operation) {
     console.log('Result too long, cutting down to characterLimit.');
     if (result.includes('.')) {
       let decimalLength = result.slice(result.indexOf('.') + 1).length;
-      console.log('decimalLength:' + decimalLength);
+      console.log('decimalLength: ' + decimalLength);
       let targetLength = decimalLength - (result.length - characterLimit);
-      console.log('targetLength:' + targetLength);
-      console.log('result before:' + result);
+      console.log('targetLength: ' + targetLength);
+      console.log('result before: ' + result);
       result = parseFloat(result).toFixed(targetLength);
       if (result.includes('.') && result[result.length - 1] === '0') {
         return removeZero(result);
