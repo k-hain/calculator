@@ -92,10 +92,10 @@ function updateDisplay() {
   operandBDisplay.textContent = operandB;
   //---
   console.log('A: ' + operandA);
-  console.log(typeof operandA);
+  console.log("typeof A: " + typeof operandA);
   console.log('OP: ' + operator);
   console.log('B: ' + operandB);
-  console.log(typeof operandB);
+  console.log("typeof B: " + typeof operandB);
   console.log('-- Display updated --');
   //---
 }
@@ -127,19 +127,44 @@ function operate(a, b, operation) {
   } else if (operation === '*') {
     result = multiply(a, b).toString();
   }
+  if (result.includes('.') && result[result.length - 1] === '0') {
+    result = removeZero(result);
+  }
   if (result.length > characterLimit) {
-    console.log('Result to long, cutting down to characterLimit.');
+    console.log('Result too long, cutting down to characterLimit.');
     if (result.includes('.')) {
       let decimalLength = result.slice(result.indexOf('.') + 1).length;
       console.log('decimalLength:' + decimalLength);
       let targetLength = decimalLength - (result.length - characterLimit);
       console.log('targetLength:' + targetLength);
-      console.log('result:' + result);
+      console.log('result before:' + result);
       result = parseFloat(result).toFixed(targetLength);
+      if (result.includes('.') && result[result.length - 1] === '0') {
+        return removeZero(result);
+      }
     } else {
       alert("Outcome larger than character limit: result isn't accurate ;-(");
-      result = result.slice(0, characterLimit);
+      return result.slice(0, characterLimit);
     }
   }
   return result;
+}
+
+function removeZero(val) {
+  console.log('Removing zeros...');
+  console.log('Result before cutting: ' + val);
+  let cutHere = 0;
+  let keepGoing = 1;
+  let i = 0;
+  tempVal = val.split('').reverse();
+  while (keepGoing === 1) {
+    if (tempVal[i] === '0') {
+      cutHere += 1;
+      i ++;
+    } else {
+      keepGoing = 0;
+    }
+  }
+  console.log('First non-zero at:' + cutHere);
+  return val.slice(0, -cutHere);
 }
