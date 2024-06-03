@@ -41,9 +41,9 @@ function processDown(button) {
       operandB = '';
     }
   } else if (operatorVals.includes(button.id)) {
-    if (operandA === '0' && button.id === '-') {
-      operandA = button.id;
-    } else { 
+    if (operandA === '0' && operator === '' && button.id === '-') {
+      operandA = '-';
+    } else if (operandA !== '-' && operator === '') { 
       operator = button.id;
     }
   } else if (operandVals.includes(button.id)) {
