@@ -156,7 +156,7 @@ function removeZero(val) {
   let cutHere = 0;
   let keepGoing = 1;
   let i = 0;
-  tempVal = val.split('').reverse();
+  let tempVal = val.split('').reverse();
   while (keepGoing === 1) {
     if (tempVal[i] === '0') {
       cutHere += 1;
