@@ -147,6 +147,10 @@ function multiply(a, b) {
 }
 
 function operate(a, b, operation) {
+  if (b === '0' && operation === '/') {
+    alert("Please don't do that, it's very cheeky.");
+    return '0';
+  }
   let result = '';
   if (operation === '+') {
     result = add(a, b).toString();
