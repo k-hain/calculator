@@ -43,7 +43,7 @@ function processDown(button, source) {
     input = button.id;
     button.classList.remove('btnShadow');
     button.classList.add('btnShadowClicked');
-  } else if (source = 'keyboard') {
+  } else if (source === 'keyboard') {
     input = button;
   }
   //console.log(input + ' ' + source);
