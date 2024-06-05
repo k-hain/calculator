@@ -10,6 +10,7 @@ let operator = '';
 
 const operandVals = '0123456789.';
 const operatorVals = '+-*/';
+const inputVals = '0123456789.+-*/=';
 const characterLimit = 15;
 
 buttons.forEach((button) => {
@@ -25,6 +26,12 @@ buttons.forEach((button) => {
   button.addEventListener('mouseleave', () => {
     processLeave(button);
   });
+});
+
+document.addEventListener("keydown", (e) => {
+  if (inputVals.includes(e.key)) {
+    console.log(e.key);
+  }
 });
 
 function processDown(button) {
