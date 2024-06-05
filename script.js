@@ -10,58 +10,68 @@ let operator = '';
 
 const operandVals = '0123456789.';
 const operatorVals = '+-*/';
-const inputVals = '0123456789.+-*/=';
 const characterLimit = 15;
 
 buttons.forEach((button) => {
   button.addEventListener('mousedown', () => {
-    processDown(button);
+    processDown(button, 'mouse');
   });
   button.addEventListener('mouseup', () => {
-    processUp(button);
+    processUp(button, 'mouse');
   });
   button.addEventListener('mouseenter', () => {
-    processEnter(button);
+    processEnter(button, 'mouse');
   });
   button.addEventListener('mouseleave', () => {
-    processLeave(button);
+    processLeave(button, 'mouse');
   });
 });
 
 document.addEventListener("keydown", (e) => {
-  if (inputVals.includes(e.key)) {
-    console.log(e.key);
+  if (operandVals.includes(e.key) || operatorVals.includes(e.key)) {
+    processDown(e.key, 'keyboard');
+  } else if (e.key === 'Enter') {
+    processDown('=', 'keyboard');
+  } else if (e.key === 'Backspace') {
+    processDown('ce', 'keyboard');
   }
 });
 
-function processDown(button) {
-  button.classList.remove('btnShadow');
-  button.classList.add('btnShadowClicked');
-  if (button.id === 'ac') {
+function processDown(button, source) {
+  let input;
+  if (source === 'mouse') {
+    input = button.id;
+    button.classList.remove('btnShadow');
+    button.classList.add('btnShadowClicked');
+  } else if (source = 'keyboard') {
+    input = button;
+  }
+  //console.log(input + ' ' + source);
+  if (input === 'ac') {
     operandA = '0';
     operator = '';
     operandB = '';
-  } else if (button.id === '=') {
+  } else if (input === '=') {
     if (operandB.length >= 1) {
       operandA = operate(operandA, operandB, operator);
       operator = '';
       operandB = '';
     }
-  } else if (operatorVals.includes(button.id)) {
-    if (operandA === '0' && operator === '' && button.id === '-') {
+  } else if (operatorVals.includes(input)) {
+    if (operandA === '0' && operator === '' && input === '-') {
       operandA = '-';
     } else if (operandA !== '-' && operator === '') { 
-      operator = button.id;
+      operator = input;
     }
-  } else if (operandVals.includes(button.id)) {
+  } else if (operandVals.includes(input)) {
     if (operator !== '') {
-      operandB = changeOperand(operandB, button);  
+      operandB = changeOperand(operandB, input);  
     } else {
-      operandA = changeOperand(operandA, button);
+      operandA = changeOperand(operandA, input);
     }
-  } else if (operatorVals.includes(button.id)) {
-    operator = button.id;
-  } else if (button.id === 'ce') {
+  } else if (operatorVals.includes(input)) {
+    operator = input;
+  } else if (input === 'ce') {
     if (operandB === '0.') {
       operandB = '';
     } else if (operandB !== '') {
@@ -100,11 +110,11 @@ function processLeave(button) {
   }
 }
 
-function changeOperand(operand, button) {
+function changeOperand(operand, input) {
   if (operand.length >= characterLimit) {
     //operand is full = do nothing
     return operand;
-  } else if (button.id === '.') {
+  } else if (input === '.') {
     if (operator !== '') {
       if (operand === '') {
         return '0.';
@@ -114,12 +124,12 @@ function changeOperand(operand, button) {
     } else if (operand.includes('.')) {
       return operand;
     } else {
-      return operand += button.id;
+      return operand += input;
     }
   } else if (operand === '0') {
-    return button.id;
+    return input;
   } else {
-    return operand += button.id;
+    return operand += input;
   }
 }
 
